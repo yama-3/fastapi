@@ -1,6 +1,8 @@
 version: "3.11"
 services:
   app:
+    depends_on:
+      - db
     build:
       context: ./
       dockerfile: Dockerfile
@@ -8,3 +10,18 @@ services:
     volumes:
       - ./:/app
     tty: true
+  db:
+    image: mysql:8.0
+    container_name: db
+    platform: linux/x86_64
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: demo
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    tty: true
+
+volumes:
+  mysql_data:
