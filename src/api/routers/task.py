@@ -4,16 +4,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 import schemas.task as task_schema
 import cruds.task as task_crud
-from db import SessionLocal
+from db import get_db
 
 router = APIRouter()
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.get("/tasks", response_model=List[task_schema.Task])
 async def list_tasks(db: AsyncSession = Depends(get_db)):
