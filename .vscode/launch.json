@@ -10,14 +10,14 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "main:app",
+                "api.main:app",
                 "--reload",
                 "--port",
                 "8000"
             ],
             "jinja": true,
             "justMyCode": true,
-            "cwd": "/app/src/api"
+            "cwd": "/app/src"
         }
     ]
 }
